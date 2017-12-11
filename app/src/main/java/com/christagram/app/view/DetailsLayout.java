@@ -7,6 +7,7 @@ package com.christagram.app.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.CardView;
@@ -27,6 +28,7 @@ import com.christagram.app.data.Business;
 import com.christagram.app.data.Coordinates;
 import com.christagram.app.ui.HideDetailsTransitionSet;
 import com.christagram.app.ui.ShowDetailsTransitionSet;
+import com.christagram.app.utils.Utils;
 
 import java.util.List;
 
@@ -39,6 +41,7 @@ public class DetailsLayout extends CoordinatorLayout {
   TextView mOpenNowTextView;
   RatingBar mRating;
   private Button mTakeMeThere;
+  private Button mSendPostCard;
 
   public DetailsLayout(final Context context) {
     this(context, null);
@@ -58,6 +61,7 @@ public class DetailsLayout extends CoordinatorLayout {
     mOpenNowTextView = (TextView) findViewById(R.id.opening);
     mRating = (RatingBar) findViewById(R.id.rating);
     mTakeMeThere = (Button) findViewById(R.id.takeMe);
+    mSendPostCard = (Button) findViewById(R.id.sendPostCard);
   }
 
   private void setData(final  Business place) {
@@ -78,6 +82,12 @@ public class DetailsLayout extends CoordinatorLayout {
         Coordinates coordinates = place.getCoordinates();
         coordinatesText = coordinates.getLatitude() + "," +coordinates.getLongitude();
         startNavigation(coordinatesText);
+      }
+    });
+    mSendPostCard.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        startPostCard();
       }
     });
   }
@@ -138,5 +148,16 @@ public class DetailsLayout extends CoordinatorLayout {
            Uri.parse("http://maps.google.com/maps?daddr="+latLong));
    ((Activity)getContext()).startActivity(intent);
  }
+
+  public void startPostCard() {
+    PackageManager packageManager = getContext().getPackageManager();
+    String inkPackage = "com.sincerely.android.ink";
+    if (Utils.isPackageInstalled(inkPackage, packageManager)) {
+      ((Activity)getContext()).startActivity(packageManager.getLaunchIntentForPackage(inkPackage));
+    } else {
+      Utils.startPlaystore((Activity)getContext(), inkPackage);
+    }
+  }
+
 
 }

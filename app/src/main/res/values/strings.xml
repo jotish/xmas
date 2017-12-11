@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Chirstagram</string>
+    <string name="app_name">XMas Markets</string>
     <string name="lists">List</string>
     <string name="map">Map</string>
     <string name="retail_rice">%1$s %2$s</string>
@@ -9,4 +9,5 @@
     <string name="is_closed">Closed now</string>
     <string name="is_open">Open now</string>
     <string name="send_postcard">SEND A POSTCARD</string>
+    <string name="ratings">Ratings</string>
 </resources>
