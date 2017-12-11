@@ -1,0 +1,160 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+    <variable
+      name="mapItemViewModel"
+      type="com.christagram.app.viewmodel.MapItemViewModel"/>
+  </data>
+
+  <android.support.v7.widget.CardView
+    android:id="@+id/itemView"
+    android:layout_width="150dp"
+    android:layout_height="280dp"
+    android:layout_marginLeft="@dimen/padding_tiny"
+    android:layout_marginRight="@dimen/padding_tiny"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:onClick="@{mapItemViewModel::onItemClick}"
+    android:orientation="vertical">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+      <ImageView
+        android:id="@+id/photo"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:scaleType="fitXY"
+        tools:errorDrawable="@{@drawable/network_failure}"
+        tools:imageUrl="@{mapItemViewModel.mediaImageUrl}"
+        tools:placeHolderDrawable="@{@drawable/image_placeholder}"/>
+
+      <TextView
+        android:id="@+id/item_name"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="@dimen/padding_micro"
+        android:layout_gravity="center_vertical"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="2"
+        android:minLines="2"
+        android:text="@{mapItemViewModel.itemName}"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="@dimen/textsize_medium"
+        android:transitionName="titleTransition"
+        tools:text="Windsor Heritage"/>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/padding_micro"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+          android:layout_width="@dimen/padding_small"
+          android:layout_height="@dimen/padding_small"
+          android:layout_marginStart="@dimen/padding_small"
+          android:layout_marginEnd="@dimen/padding_small"
+          android:src="@android:drawable/star_on"/>
+
+
+        <RatingBar
+          android:id="@+id/rating"
+          style="@style/Base.Widget.AppCompat.RatingBar.Small"
+          android:numStars="5"
+          android:isIndicator="true"
+          android:stepSize="0.5"
+          android:rating="@{mapItemViewModel.rating}"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textColor="@color/greenLight"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="@dimen/padding_micro"
+          android:gravity="center_vertical"
+          android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/padding_small"
+            android:layout_height="@dimen/padding_small"
+            android:layout_marginStart="@dimen/padding_small"
+            android:layout_marginEnd="@dimen/padding_small"
+            android:src="@android:drawable/ic_input_get"/>
+
+
+        <TextView
+            android:id="@+id/opening"
+            style="@style/Base.Widget.AppCompat.RatingBar.Small"
+            android:text="@{mapItemViewModel.openNowText}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/greenLight"/>
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/padding_micro"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+          android:layout_width="@dimen/padding_medium"
+          android:layout_height="@dimen/padding_medium"
+          android:layout_marginStart="@dimen/padding_small"
+          android:layout_marginEnd="@dimen/padding_small"
+          android:src="@drawable/ic_place_black_24dp"/>
+
+        <TextView
+          android:id="@+id/location"
+          style="@style/Text.Tiny"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="2"
+          android:ellipsize="end"
+          android:maxLines="2"
+          android:text="@{mapItemViewModel.locationName}"
+          tools:text="Walter Street"/>
+
+
+      </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      app:layout_anchor="@id/container"
+      app:layout_anchorGravity="top|center"
+      android:background="@drawable/rounded_background_white">
+      <TextView
+        android:id="@+id/number"
+        style="@style/Text.Large.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@{mapItemViewModel.position}"
+        android:textColor="@color/redDark"
+        tools:text="1"/>
+
+    </LinearLayout>
+
+  </android.support.v7.widget.CardView>
+
+</layout>

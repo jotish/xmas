@@ -1,0 +1,42 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/colorAccent</item>
+    </style>
+
+    <style name="Text.Large" parent="Base.TextAppearance.AppCompat.Large">
+    </style>
+    <style name="Text.Large.Bold" parent="Base.TextAppearance.AppCompat.Medium">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Medium" parent="Base.TextAppearance.AppCompat.Medium">
+    </style>
+    <style name="Text.Medium.Bold" parent="Base.TextAppearance.AppCompat.Medium">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Text.Small" parent="Base.TextAppearance.AppCompat.Small">
+    </style>
+    <style name="Text.Small.Bold" parent="Base.TextAppearance.AppCompat.Small">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Tiny" parent="Base.TextAppearance.AppCompat.Small">
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="Text.Tiny.Bold" parent="Text.Tiny">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Micro" parent="Base.TextAppearance.AppCompat.Small">
+        <item name="android:textSize">8sp</item>
+    </style>
+
+
+</resources>

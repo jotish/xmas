@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_medium">12dp</dimen>
+    <dimen name="padding_large">22dp</dimen>
+    <dimen name="padding_tiny">6dp</dimen>
+    <dimen name="padding_micro">3dp</dimen>
+    <dimen name="padding_small">10dp</dimen>
+
+    <dimen name="textsize_very_small">9sp</dimen>
+    <dimen name="textsize_small">11sp</dimen>
+    <dimen name="textsize_medium">13sp</dimen>
+    <dimen name="textsize_big">16sp</dimen>
+    <dimen name="textsize_very_big">18sp</dimen>
+    <dimen name="textsize_huge">21sp</dimen>
+    <dimen name="textsize_very_huge">26sp</dimen>
+    <dimen name="textsize_enormous">36sp</dimen>
+
+</resources>

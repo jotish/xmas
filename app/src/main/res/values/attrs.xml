@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+
+  <attr name="centered" format="boolean" />
+  <attr name="selectedColor" format="color" />
+  <attr name="strokeWidth" format="dimension" />
+  <attr name="unselectedColor" format="color" />
+
+  <declare-styleable name="ScaleDownImageTransition">
+    <attr name="factor" format="integer"/>
+  </declare-styleable>
+
+</resources>

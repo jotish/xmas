@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.christagram.app.view.DetailsLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/bali_details_container"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/place_details_background">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="580dp"
+        android:background="@color/white"
+        android:layout_gravity="bottom"
+        android:layout_marginEnd="@dimen/padding_small"
+        android:layout_marginStart="@dimen/padding_small"
+        >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/headerImage"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            style="@style/Text.Large.Bold"
+            android:textColor="@color/blackShade"
+            android:textSize="@dimen/textsize_very_huge"
+            android:textStyle="bold"
+            android:transitionName="titleTransition"/>
+
+        <LinearLayout
+            android:id="@+id/descriptionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_small"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padding_micro"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/padding_small"
+                    android:layout_height="@dimen/padding_small"
+                    android:layout_marginStart="@dimen/padding_small"
+                    android:layout_marginEnd="@dimen/padding_small"
+                    android:src="@android:drawable/star_on"/>
+
+
+                <RatingBar
+                    android:id="@+id/rating"
+                    style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                    android:numStars="5"
+                    android:isIndicator="true"
+                    android:stepSize="0.5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/greenLight"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padding_micro"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/padding_small"
+                    android:layout_height="@dimen/padding_small"
+                    android:layout_marginStart="@dimen/padding_small"
+                    android:layout_marginEnd="@dimen/padding_small"
+                    android:src="@android:drawable/ic_input_get"/>
+
+
+                <TextView
+                    android:id="@+id/opening"
+                    style="@style/Text.Medium.Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/greenLight"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:padding="@dimen/padding_small"
+            tools:text="Street name"
+            android:textColor="@color/blackLightShade" />
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:padding="@dimen/padding_tiny"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/sendPostCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/orangeDark"
+                android:drawableStart="@drawable/email"
+                android:gravity="center"
+                android:padding="@dimen/padding_small"
+                android:text="@string/send_postcard"
+                android:layout_marginBottom="@dimen/padding_small"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/takeMe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/orangeDark"
+                android:drawableStart="@drawable/ic_near_me_black_24dp"
+                android:padding="@dimen/padding_small"
+                android:gravity="center"
+                android:text="@string/take_me_there"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+</com.christagram.app.view.DetailsLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+    <variable
+        name="itemMapViewModel"
+        type="com.christagram.app.viewmodel.FragmentMapViewModel"/>
+  </data>
+
+  <android.support.design.widget.CoordinatorLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+    <fragment
+        android:id="@+id/mapFragment"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/padding_medium"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+      <ProgressBar
+          android:id="@+id/progress_loader"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:visibility="@{itemMapViewModel.listProgress}"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:visibility="@{itemMapViewModel.itemContainer}">
+
+      <com.christagram.app.ui.maps.PulseOverlayLayout
+          android:id="@+id/mapOverlayLayout"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_marginBottom="@dimen/padding_small">
+
+        <ImageView
+            android:id="@+id/mapPlaceholder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:transitionName="@string/mapPlaceholderTransition"/>
+
+      </com.christagram.app.ui.maps.PulseOverlayLayout>
+
+      <FrameLayout
+          android:id="@+id/data_container"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_gravity="bottom"/>
+
+      </FrameLayout>
+    </FrameLayout>
+  </android.support.design.widget.CoordinatorLayout>
+
+</layout>
