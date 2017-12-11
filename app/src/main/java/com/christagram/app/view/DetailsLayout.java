@@ -23,16 +23,28 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.christagram.app.ChristmasApplication;
 import com.christagram.app.R;
 import com.christagram.app.data.Business;
 import com.christagram.app.data.Coordinates;
+import com.christagram.app.data.venues.Category;
+import com.christagram.app.data.venues.Explore;
+import com.christagram.app.data.venues.Group;
+import com.christagram.app.data.venues.Item;
+import com.christagram.app.repo.MarketsRepo;
 import com.christagram.app.ui.HideDetailsTransitionSet;
 import com.christagram.app.ui.ShowDetailsTransitionSet;
 import com.christagram.app.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class DetailsLayout extends CoordinatorLayout {
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+
+public class DetailsLayout extends CoordinatorLayout{
 
   public CardView cardViewContainer;
   public ImageView placeImageView;
@@ -42,6 +54,8 @@ public class DetailsLayout extends CoordinatorLayout {
   RatingBar mRating;
   private Button mTakeMeThere;
   private Button mSendPostCard;
+  private CompositeDisposable compositeDisposable = new CompositeDisposable();
+  private TextView mVenues;
 
   public DetailsLayout(final Context context) {
     this(context, null);
@@ -62,6 +76,7 @@ public class DetailsLayout extends CoordinatorLayout {
     mRating = (RatingBar) findViewById(R.id.rating);
     mTakeMeThere = (Button) findViewById(R.id.takeMe);
     mSendPostCard = (Button) findViewById(R.id.sendPostCard);
+    mVenues = (TextView) findViewById(R.id.venues);
   }
 
   private void setData(final  Business place) {
@@ -90,6 +105,7 @@ public class DetailsLayout extends CoordinatorLayout {
         startPostCard();
       }
     });
+    getExploreList(place);
   }
 
   public static Scene showScene(Activity activity, final ViewGroup container,
@@ -159,5 +175,64 @@ public class DetailsLayout extends CoordinatorLayout {
     }
   }
 
+  private void getExploreList(Business place) {
+    ChristmasApplication realEstateApplication = ChristmasApplication.create(getContext());
+    MarketsRepo itemService = realEstateApplication.getMarketRepo();
+    Coordinates coordinates = place.getCoordinates();
+    String latLong = coordinates.getLatitude() + "," + coordinates.getLongitude();
+    Disposable disposable = itemService.fetchExplorations(latLong, 500)
+            .subscribeOn(realEstateApplication.subscribeScheduler())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Consumer<Explore>() {
+              @Override public void accept(Explore itemResponse) throws Exception {
+                if (itemResponse != null && itemResponse.getResponse() != null
+                        && itemResponse.getResponse().getGroups() != null)
+                   showExtraVenues(itemResponse.getResponse().getGroups());
+              }
+            }, new Consumer<Throwable>() {
+              @Override public void accept(Throwable throwable) throws Exception {
+                showFailureState();
+              }
+            });
+    compositeDisposable.add(disposable);
+  }
+
+  public void showExtraVenues(List<Group> groups) {
+      List<String> venues = new ArrayList<>();
+      for(Group group : groups) {
+         if(group.getItems() != null ) {
+             for (Item item: group.getItems()) {
+                 if (item.getVenue() != null) {
+                     String venue = item.getVenue().getName();
+                     if (item.getVenue().getCategories().size()> 0 ) {
+                       Category category = item.getVenue().getCategories().get(0);
+                       venue = venue + " - " + category.getName();
+                     }
+                     venues.add(venue);
+                 }
+             }
+         }
+      }
+      String venuesAppended = "Things to do:\n\n";
+      int i = 1;
+      for(String venue : venues) {
+          if (i > 4) {
+              break;
+          }
+          venuesAppended = venuesAppended + i + ") "+ venue + "\n";
+          i++;
+      }
+
+      mVenues.setText(venuesAppended);
+  }
+
+  private void unSubscribeFromObservable() {
+    if (compositeDisposable != null && !compositeDisposable.isDisposed()) {
+      compositeDisposable.dispose();
+    }
+  }
+  public void showFailureState() {
+    Utils.showNotificationToast(getContext(), getContext().getString(R.string.error_network));
+  }
 
 }

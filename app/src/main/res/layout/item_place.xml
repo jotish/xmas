@@ -108,6 +108,16 @@
             style="Text.Medium"
             android:textColor="@color/blackLightShade" />
 
+        <TextView
+            android:layout_marginLeft="@dimen/padding_small"
+            android:id="@+id/venues"
+            style="@style/Text.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blackShade"
+            android:maxLines="6"
+            tools:text="Venues\nVenues\nVenues\nVenues\n"/>
+
     </LinearLayout>
 
         <LinearLayout
